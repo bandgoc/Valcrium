@@ -7,7 +7,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--blue:#3266ad;--green:#2d9b6f;--amber:#d4890a;--red:#c03535;--border:#e0dfd7;--input-border:#b8b7b0;--bg:#2946D5;--bg2:#2035b8;--text:#ffffff;--text2:#c2ccf5;--r:8px;--rl:10px}
+:root{--blue:#3266ad;--green:#2d9b6f;--amber:#d4890a;--red:#c03535;--border:#e0dfd7;--input-border:#b8b7b0;--bg:#ffffff;--bg2:#f3f2ee;--text:#1a1a18;--text2:#5f5e5a;--r:8px;--rl:10px}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);display:flex;min-height:100vh}
 /* SIDEBAR */
 .sb{width:220px;min-width:220px;background:#0f1c2e;min-height:100vh;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;flex-shrink:0}
@@ -36,7 +36,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .page{display:none}.page.active{display:block}
 .lang-bar{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin-bottom:1.25rem;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
 .lang-bar span{font-size:11px;font-weight:600;color:var(--text);text-transform:uppercase;letter-spacing:.6px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
-.lang-select{font-size:13px;font-weight:500;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;padding:6px 32px 6px 10px;border-radius:var(--r);border:1px solid var(--border);background:#ffffff;color:#1a1a18;cursor:pointer;outline:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' fill='none' stroke='%2373726c' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;transition:border-color .15s;height:32px;box-sizing:border-box;}
+.lang-select{font-size:13px;font-weight:500;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;padding:6px 32px 6px 10px;border-radius:var(--r);border:1px solid var(--border);background:var(--bg);color:var(--text);cursor:pointer;outline:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' fill='none' stroke='%2373726c' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;transition:border-color .15s;height:32px;box-sizing:border-box;}
 .lang-select:focus,.lang-select:hover{border-color:var(--blue)}
 
 /* ── CLAUDE SIDEBAR BUTTON ──────────────────────────────────────── */
@@ -248,7 +248,7 @@ body.dark .modal-field input,body.dark .modal-field textarea,body.dark .modal-fi
 .pg-hdr p{font-size:12px;color:var(--text2);margin-top:3px}
 .pg-hdr-row{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-bottom:1.25rem;border-bottom:1px solid var(--border);margin-bottom:1.5rem}
 /* SHARED CARDS */
-.section{background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.18);border-radius:var(--rl);margin-bottom:1.5rem;overflow:hidden}
+.section{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);margin-bottom:1.5rem;overflow:hidden}
 .sec-hdr{display:flex;align-items:center;gap:10px;padding:14px 20px;background:var(--bg2);border-bottom:1px solid var(--border)}
 .sec-num{width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .sec-title{font-size:14px;font-weight:600;color:var(--text)}
@@ -259,7 +259,7 @@ body.dark .modal-field input,body.dark .modal-field textarea,body.dark .modal-fi
 .fl{display:flex;flex-direction:column;gap:5px}
 .fl label{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text2)}
 .fl label .req{color:var(--red);margin-left:2px}
-.fl input,.fl select,.fl textarea{font-size:13px;color:#1a1a18;background:#ffffff;border:1px solid var(--input-border);border-radius:var(--r);padding:9px 12px;outline:none;width:100%;transition:border-color .15s,box-shadow .15s;font-family:inherit;box-sizing:border-box;height:40px}
+.fl input,.fl select,.fl textarea{font-size:13px;color:var(--text);background:var(--bg);border:1px solid var(--input-border);border-radius:var(--r);padding:9px 12px;outline:none;width:100%;transition:border-color .15s,box-shadow .15s;font-family:inherit;box-sizing:border-box;height:40px}
 .fl textarea{height:auto;min-height:64px;resize:vertical;line-height:1.5}
 .fl input:focus,.fl select:focus,.fl textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(50,102,173,.12);background:var(--bg)}
 .fl input.err,.fl select.err{border-color:var(--red);box-shadow:0 0 0 3px rgba(192,53,53,.1)}
