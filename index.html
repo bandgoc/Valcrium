@@ -396,8 +396,7 @@ footer{background:var(--text);color:rgba(255,255,255,.4);padding:40px 5vw;displa
 </div>
 
 <!-- Supabase CDN -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="supabase.js"></script>
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 <script>
 function openModal(tab) {
   document.getElementById('auth-modal').classList.add('open');
@@ -422,9 +421,24 @@ async function handleSignup() {
   if(pass.length < 8){ err.textContent='Password must be at least 8 characters.'; err.style.display='block'; return; }
   try {
     err.style.display='none';
-    await signUp(email, pass, name, firm);
-    window.location.href = '/app.html';
+    const btn = event.target; btn.textContent='Creating account...'; btn.disabled=true;
+    const { data, error } = await db.auth.signUp({
+      email, password: pass,
+      options: { data: { full_name: name, firm_name: firm } }
+    });
+    if(error) throw error;
+    // Try to create profile (may fail if user needs to verify email first)
+    try { await db.from('profiles').upsert({ id: data.user.id, full_name: name, firm_name: firm }); } catch(e2){}
+    if(data.user && data.session) {
+      window.location.href = '/app.html';
+    } else {
+      err.style.color='var(--green)';
+      err.textContent='✓ Check your email to confirm your account!';
+      err.style.display='block';
+    }
   } catch(e) {
+    const btn = document.querySelector('#form-signup .btn-hero'); if(btn){btn.textContent='Create account →';btn.disabled=false;}
+    err.style.color='var(--red,#c03535)';
     err.textContent = e.message; err.style.display='block';
   }
 }
@@ -434,17 +448,24 @@ async function handleLogin() {
   const err   = document.getElementById('li-err');
   try {
     err.style.display='none';
-    await signIn(email, pass);
+    const { data, error } = await db.auth.signInWithPassword({ email, password: pass });
+    if(error) throw error;
     window.location.href = '/app.html';
   } catch(e) {
     err.textContent = 'Invalid email or password.'; err.style.display='block';
   }
 }
-// Check if already logged in
-(async () => {
-  const user = await getUser();
-  if(user) window.location.href = '/app.html';
-})();
+// Init Supabase and check if already logged in
+const SUPABASE_URL  = 'https://pmoyqllmwmzqqdqufxky.supabase.co';
+const SUPABASE_ANON = 'sb_publishable_OyhEh-KcHBn3EgEjRsTYaQ_yeG-Dc3n';
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+
+window.addEventListener('load', async () => {
+  try {
+    const { data: { user } } = await db.auth.getUser();
+    if(user) window.location.href = '/app.html';
+  } catch(e){}
+});
 </script>
 </body>
 </html>
