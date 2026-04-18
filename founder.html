@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valcrium Founder Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--gold:#c9a84c;--blue:#2946D5;--green:#2d9b6f;--red:#c03535;--border:#e8e6e0;--bg:#fafaf8;--text:#0a0a0a;--text2:#5a5a5a}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+header{background:var(--blue);padding:16px 32px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--gold);font-weight:500}
+.header-right{display:flex;align-items:center;gap:16px}
+.founder-badge{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;background:var(--gold);color:#fff;border-radius:20px}
+.signout{font-size:13px;color:rgba(255,255,255,.6);cursor:pointer;background:none;border:none;font-family:inherit}
+.signout:hover{color:#fff}
+main{padding:40px 32px;max-width:1400px;margin:0 auto}
+h1{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:500;margin-bottom:6px}
+.subtitle{font-size:14px;color:var(--text2);margin-bottom:36px}
+.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:36px}
+.kpi{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px 24px}
+.kpi-label{font-size:11px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--text2);margin-bottom:8px}
+.kpi-value{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:500;line-height:1;color:var(--text)}
+.kpi-value.gold{color:var(--gold)}
+.section-title{font-size:14px;font-weight:600;margin-bottom:14px;letter-spacing:-.2px}
+.table-wrap{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:32px}
+table{width:100%;border-collapse:collapse}
+th{font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text2);padding:11px 20px;text-align:left;background:#f5f4f0;border-bottom:1px solid var(--border)}
+td{padding:13px 20px;font-size:13px;border-bottom:1px solid var(--border);color:var(--text)}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#fafaf8}
+.badge{display:inline-block;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px}
+.badge.active{background:#e8f5ee;color:var(--green)}
+.badge.trial{background:#fff8e6;color:#b37100}
+.badge.founder{background:#e8eeff;color:var(--blue)}
+.empty{padding:48px;text-align:center;color:var(--text2);font-size:14px}
+.loading{padding:48px;text-align:center;color:var(--text2);font-size:14px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Valcrium</div>
+  <div class="header-right">
+    <span class="founder-badge">Founder View</span>
+    <button class="signout" onclick="signOut()">Sign out</button>
+  </div>
+</header>
+
+<main>
+  <h1>Founder Dashboard</h1>
+  <p class="subtitle">All accounts and activity across the platform</p>
+
+  <div class="kpi-row">
+    <div class="kpi"><div class="kpi-label">Total Accounts</div><div class="kpi-value gold" id="f-accounts">—</div></div>
+    <div class="kpi"><div class="kpi-label">Companies</div><div class="kpi-value" id="f-companies">—</div></div>
+    <div class="kpi"><div class="kpi-label">Objectives</div><div class="kpi-value" id="f-objectives">—</div></div>
+    <div class="kpi"><div class="kpi-label">Initiatives</div><div class="kpi-value" id="f-initiatives">—</div></div>
+    <div class="kpi"><div class="kpi-label">Active Today</div><div class="kpi-value" id="f-active">—</div></div>
+  </div>
+
+  <div class="section-title">All Accounts</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Firm</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Companies</th>
+          <th>Objectives</th>
+          <th>Initiatives</th>
+          <th>Joined</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="accounts-tbody">
+        <tr><td colspan="9" class="loading">Loading accounts…</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">Recent Signups (last 30 days)</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Name</th><th>Firm</th><th>Email</th><th>Joined</th></tr>
+      </thead>
+      <tbody id="recent-tbody">
+        <tr><td colspan="4" class="loading">Loading…</td></tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+<script>
+async function loadFounderData() {
+  const user = await getUser();
+  if (!user) { window.location.href = '/'; return; }
+
+  const profile = await getProfile();
+  if (!profile || profile.role !== 'founder') {
+    alert('Access denied. Founder role required.');
+    window.location.href = '/app.html';
+    return;
+  }
+
+  try {
+    // Get all profiles
+    const { data: profiles } = await db.from('profiles').select('*').order('created_at', { ascending: false });
+    const { data: companies } = await db.from('companies').select('user_id');
+    const { data: objectives } = await db.from('objectives').select('user_id');
+    const { data: initiatives } = await db.from('initiatives').select('user_id');
+
+    // KPIs
+    document.getElementById('f-accounts').textContent    = profiles?.length || 0;
+    document.getElementById('f-companies').textContent   = companies?.length || 0;
+    document.getElementById('f-objectives').textContent  = objectives?.length || 0;
+    document.getElementById('f-initiatives').textContent = initiatives?.length || 0;
+
+    // Per-user counts
+    const coCounts  = {};
+    const objCounts = {};
+    const iniCounts = {};
+    companies?.forEach(r  => { coCounts[r.user_id]  = (coCounts[r.user_id]  || 0) + 1; });
+    objectives?.forEach(r => { objCounts[r.user_id] = (objCounts[r.user_id] || 0) + 1; });
+    initiatives?.forEach(r=> { iniCounts[r.user_id] = (iniCounts[r.user_id] || 0) + 1; });
+
+    // Get user emails from auth (requires service role in production)
+    const tbody = document.getElementById('accounts-tbody');
+    if (!profiles?.length) {
+      tbody.innerHTML = '<tr><td colspan="9" class="empty">No accounts yet</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = profiles.map(p => {
+      const joined = new Date(p.created_at).toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
+      const role = p.role || 'analyst';
+      const badgeClass = role === 'founder' ? 'founder' : 'active';
+      return `<tr>
+        <td><strong>${p.full_name || '—'}</strong></td>
+        <td>${p.firm_name || '—'}</td>
+        <td style="color:var(--text2)">${p.id.slice(0,8)}…</td>
+        <td><span class="badge ${badgeClass}">${role}</span></td>
+        <td>${coCounts[p.id] || 0}</td>
+        <td>${objCounts[p.id] || 0}</td>
+        <td>${iniCounts[p.id] || 0}</td>
+        <td style="color:var(--text2)">${joined}</td>
+        <td><span class="badge active">Active</span></td>
+      </tr>`;
+    }).join('');
+
+    // Recent signups (last 30 days)
+    const thirty = new Date(); thirty.setDate(thirty.getDate() - 30);
+    const recent = profiles.filter(p => new Date(p.created_at) > thirty);
+    const rTbody = document.getElementById('recent-tbody');
+    if (!recent.length) {
+      rTbody.innerHTML = '<tr><td colspan="4" class="empty">No new signups in the last 30 days</td></tr>';
+    } else {
+      rTbody.innerHTML = recent.map(p => {
+        const joined = new Date(p.created_at).toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
+        return `<tr><td><strong>${p.full_name||'—'}</strong></td><td>${p.firm_name||'—'}</td><td style="color:var(--text2)">${p.id.slice(0,8)}…</td><td>${joined}</td></tr>`;
+      }).join('');
+    }
+
+    // Active today count
+    const today = new Date().toISOString().split('T')[0];
+    const { data: todayActivity } = await db.from('initiatives')
+      .select('user_id')
+      .gte('updated_at', today);
+    const activeUsers = new Set(todayActivity?.map(r => r.user_id) || []);
+    document.getElementById('f-active').textContent = activeUsers.size;
+
+  } catch(e) {
+    console.error('Founder data error:', e);
+  }
+}
+
+loadFounderData();
+</script>
+</body>
+</html>
