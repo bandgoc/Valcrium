@@ -10,20 +10,20 @@
 :root{--blue:#3266ad;--green:#2d9b6f;--amber:#d4890a;--red:#c03535;--border:#e0dfd7;--input-border:#b8b7b0;--bg:#ffffff;--bg2:#f3f2ee;--text:#1a1a18;--text2:#5f5e5a;--r:8px;--rl:10px}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);display:flex;min-height:100vh}
 /* SIDEBAR */
-.sb{width:220px;min-width:220px;background:#0f1c2e;min-height:100vh;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;flex-shrink:0}
-.sb-logo{padding:1.6rem 1.25rem 1.1rem;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:.5rem}
+.sb{width:220px;min-width:220px;background:#ffffff;border-right:1px solid var(--border);min-height:100vh;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;flex-shrink:0}
+.sb-logo{padding:1.6rem 1.25rem 1.1rem;border-bottom:1px solid var(--border);margin-bottom:.5rem}
 .sb-mark{width:32px;height:32px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .sb-name{font-size:28px;font-weight:500;color:#c9a84c;letter-spacing:-.5px;font-family:'Cormorant Garamond',serif;line-height:1;text-shadow:0 1px 16px rgba(201,168,76,.35)}
-.sb-sub{font-size:10px;color:rgba(255,255,255,.38);margin-top:4px;letter-spacing:.4px}
-.sb-lbl{font-size:9px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:rgba(255,255,255,.3);padding:1rem 1.25rem .4rem}
+.sb-sub{font-size:10px;color:var(--text2);margin-top:4px;letter-spacing:.4px}
+.sb-lbl{font-size:9px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--text2);padding:1rem 1.25rem .4rem}
 .sb-item{display:flex;align-items:center;gap:10px;padding:9px 1.25rem;cursor:pointer;border:none;background:none;width:100%;text-align:left;position:relative;transition:background .15s}
 .sb-item:hover{background:rgba(255,255,255,.06)}
 .sb-item.active{background:rgba(50,102,173,.25)}
 .sb-item.active::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:#3266ad;border-radius:0 2px 2px 0}
-.sb-icon{width:18px;height:18px;flex-shrink:0;display:flex;align-items:center;justify-content:center;opacity:.6;color:#fff}
-.sb-item.active .sb-icon,.sb-item:hover .sb-icon{opacity:1;color:#fff}
-.sb-lbl-text{font-size:13px;color:rgba(255,255,255,.6);font-weight:500}
-.sb-item.active .sb-lbl-text,.sb-item:hover .sb-lbl-text{color:#fff}
+.sb-icon{width:18px;height:18px;flex-shrink:0;display:flex;align-items:center;justify-content:center;opacity:.5;color:var(--text)}
+.sb-item.active .sb-icon,.sb-item:hover .sb-icon{opacity:1;color:var(--text)}
+.sb-lbl-text{font-size:13px;color:var(--text2);font-weight:500}
+.sb-item.active .sb-lbl-text,.sb-item:hover .sb-lbl-text{color:var(--text)}
 .sb-badge{margin-left:auto;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;background:rgba(50,102,173,.4);color:#8ab4e8}
 .sb-div{border:none;border-top:1px solid rgba(255,255,255,.07);margin:.5rem 0}
 .sb-bottom{margin-top:auto;border-top:1px solid rgba(255,255,255,.08);padding:.75rem 0 .5rem}
@@ -174,6 +174,17 @@ body.dark{
   --red:#e05555;
 }
 body.dark .main{background:var(--bg);}
+body.dark .sb{background:#0f1c2e;border-right-color:rgba(255,255,255,.08)}
+body.dark .sb-sub{color:rgba(255,255,255,.38)}
+body.dark .sb-lbl{color:rgba(255,255,255,.3)}
+body.dark .sb-lbl-text{color:rgba(255,255,255,.6)}
+body.dark .sb-item.active .sb-lbl-text,body.dark .sb-item:hover .sb-lbl-text{color:#fff}
+body.dark .sb-item.active{background:rgba(255,255,255,.08)}
+body.dark .sb-item:hover{background:rgba(255,255,255,.05)}
+body.dark .sb-logo{border-bottom-color:rgba(255,255,255,.08)}
+body.dark .sb-div{border-top-color:rgba(255,255,255,.08)}
+body.dark .sb-icon{color:#fff}
+body.dark .sb-item.active .sb-icon,body.dark .sb-item:hover .sb-icon{color:#fff}
 body.dark #app-screen{background:var(--bg);}
 body.dark .ccrd,body.dark .kpi-card,body.dark .section,
 body.dark .obj-tbl thead th,body.dark input[type=text],
@@ -260,6 +271,10 @@ body.dark .modal-field input,body.dark .modal-field textarea,body.dark .modal-fi
 .fl label{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text2)}
 .fl label .req{color:var(--red);margin-left:2px}
 .fl input,.fl select,.fl textarea{font-size:13px;color:var(--text);background:var(--bg);border:1px solid var(--input-border);border-radius:var(--r);padding:9px 12px;outline:none;width:100%;transition:border-color .15s,box-shadow .15s;font-family:inherit;box-sizing:border-box;height:40px}
+.date-input{font-size:13px;color:var(--text);background:var(--bg);border:1px solid var(--input-border);border-radius:var(--r);padding:9px 12px;outline:none;width:100%;transition:border-color .15s;font-family:inherit;box-sizing:border-box;height:40px}
+.date-input:focus{border-color:var(--blue)}
+body.dark .date-input{background:var(--bg2);color:var(--text);border-color:rgba(255,255,255,0.3);color-scheme:dark}
+body.dark .fl input,body.dark .fl select,body.dark .fl textarea{border-color:rgba(255,255,255,0.25)}
 .fl textarea{height:auto;min-height:64px;resize:vertical;line-height:1.5}
 .fl input:focus,.fl select:focus,.fl textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(50,102,173,.12);background:var(--bg)}
 .fl input.err,.fl select.err{border-color:var(--red);box-shadow:0 0 0 3px rgba(192,53,53,.1)}
@@ -600,6 +615,9 @@ body.dark .modal-field input,body.dark .modal-field textarea,body.dark .modal-fi
   .obj-field label { font-size:11px; font-weight:700; letter-spacing:.5px; text-transform:uppercase; color:var(--text2); }
   .obj-field input, .obj-field select, .obj-field textarea { font-size:13px; color:var(--text); background:var(--bg); border:1px solid var(--border); border-radius:var(--r); padding:9px 12px; outline:none; width:100%; font-family:inherit; transition:border-color .15s,box-shadow .15s; }
   .obj-field input:focus, .obj-field select:focus, .obj-field textarea:focus { border-color:var(--blue); box-shadow:0 0 0 3px rgba(50,102,173,.12); }
+  body.dark .obj-field input, body.dark .obj-field select, body.dark .obj-field textarea { border-color:rgba(255,255,255,0.25); }
+  body.dark #idet-edit-form input, body.dark #idet-edit-form select, body.dark #idet-edit-form textarea { border-color:rgba(255,255,255,0.25); }
+  body.dark #idet-note-input { border-color:rgba(255,255,255,0.25); }
   .obj-field textarea { resize:vertical; min-height:72px; line-height:1.5; }
   .obj-g2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
   /* NOTES */
@@ -1027,7 +1045,7 @@ body.logged-in #app-screen{display:flex;width:100%;min-height:100vh;}
         </svg>
         <div class="sb-name">Valcrium</div>
       </div>
-      <div class="sb-sub" style="margin-left:30px">Portfolio Intelligence</div>
+      <div class="sb-sub" style="margin-left:30px">A place to create value</div>
     </div>
   </div>
   <div class="sb-lbl" id="sbl-main">Main</div>
@@ -1141,7 +1159,7 @@ body.logged-in #app-screen{display:flex;width:100%;min-height:100vh;}
 <!-- PAGE: DASHBOARD -->
 <div class="page active" id="page-dashboard">
   <div class="dash-topbar">
-    <div><h1 data-i18n="dash_title">Value Creation Monitor</h1><p data-i18n="dash_sub">Portfolio-wide initiative tracker &middot; Q1 2026</p></div>
+    <div><h1 data-i18n="dash_title">Dashboard</h1><p data-i18n="dash_sub">View companies with value creation plans and track their progress</p></div>
     <div class="dash-meta">Updated Mar 22, 2026</div>
   </div>
 
@@ -1346,9 +1364,9 @@ body.logged-in #app-screen{display:flex;width:100%;min-height:100vh;}
         </div>
         <div class="g2">
           <div class="fl"><label>Start Date</label>
-            <input type="date" id="vcp-start-date" style="background:#ffffff;color:#1a1a18"></div>
+            <input type="date" id="vcp-start-date" class="date-input"></div>
           <div class="fl"><label>Target End Date</label>
-            <input type="date" id="vcp-end-date" style="background:#ffffff;color:#1a1a18"></div>
+            <input type="date" id="vcp-end-date" class="date-input"></div>
         </div>
         <div class="fl"><label data-i18n="f_key_pri">Key Priorities</label><textarea id="vcp-pri" placeholder="List the top 3–5 strategic activities…" data-i18n="ph_vcp_pri"></textarea></div>
         <div class="fl" style="margin-top:10px">
@@ -1436,9 +1454,9 @@ body.logged-in #app-screen{display:flex;width:100%;min-height:100vh;}
           <span class="ferr" id="e-ai-name">Please enter an initiative name</span></div>
         <div class="g2">
           <div class="fl"><label>Start Date</label>
-            <input type="date" id="ai-start-date" style="background:#ffffff;color:#1a1a18"></div>
+            <input type="date" id="ai-start-date" class="date-input"></div>
           <div class="fl"><label>Target End Date</label>
-            <input type="date" id="ai-end-date" style="background:#ffffff;color:#1a1a18"></div>
+            <input type="date" id="ai-end-date" class="date-input"></div>
         </div>
         <div class="fl"><label data-i18n="f_key_pri">Key Priorities</label><textarea id="ai-pri" placeholder="List the top 3–5 strategic activities…" data-i18n="ph_vcp_pri"></textarea></div>
         <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap">
@@ -2017,7 +2035,7 @@ body.logged-in #app-screen{display:flex;width:100%;min-height:100vh;}
       <div style="display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap">
         <div class="fl" style="flex:0 0 200px;margin-bottom:0">
           <label>Completed Date</label>
-          <input type="date" id="idet-complete-date" style="background:#ffffff;color:#1a1a18">
+          <input type="date" id="idet-complete-date" class="date-input">
         </div>
         <button type="button" class="btn btnp" onclick="markInitiativeComplete()" style="margin-bottom:1px">Mark Complete</button>
       </div>
@@ -2054,27 +2072,35 @@ body.logged-in #app-screen{display:flex;width:100%;min-height:100vh;}
 <div class="page" id="page-kpi-update">
   <div class="pg-hdr">
     <h1>Update KPI Data</h1>
-    <p>Enter the latest values for all quantitative initiatives</p>
+    <p>Enter monthly KPI values for quantitative initiatives across your portfolio</p>
   </div>
-  <div class="section">
-    <div class="sec-hdr">
-      <div class="sec-num">1</div>
-      <span class="sec-title">Quantitative Initiatives</span>
-      <button type="button" class="btn btnp" onclick="saveAllKPI()" style="margin-left:auto;font-size:12px;padding:5px 16px" id="kpi-save-btn">Save All ✓</button>
+
+  <!-- Controls -->
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+    <div class="fl" style="margin:0;min-width:200px">
+      <select id="kpi-co-filter" onchange="renderKPIUpdate()" style="font-size:13px;padding:7px 12px;border:1px solid var(--border);border-radius:var(--r);background:var(--bg);color:var(--text);font-family:inherit;cursor:pointer">
+        <option value="">All Companies</option>
+      </select>
     </div>
-    <div class="sec-body" style="padding:0">
-      <table style="width:100%;border-collapse:collapse;table-layout:fixed" id="kpi-update-table">
-        <thead>
+    <div class="fl" style="margin:0">
+      <select id="kpi-year-filter" onchange="renderKPIUpdate()" style="font-size:13px;padding:7px 12px;border:1px solid var(--border);border-radius:var(--r);background:var(--bg);color:var(--text);font-family:inherit;cursor:pointer">
+      </select>
+    </div>
+    <button type="button" class="btn btnp" onclick="saveAllKPI()" style="margin-left:auto;font-size:12px;padding:7px 18px" id="kpi-save-btn">Save All ✓</button>
+  </div>
+
+  <!-- Monthly KPI Table -->
+  <div class="section" style="overflow-x:auto">
+    <div style="padding:0;min-width:900px">
+      <table style="width:100%;border-collapse:collapse" id="kpi-update-table">
+        <thead id="kpi-update-thead">
           <tr style="border-bottom:2px solid #e0dfd7;background:#f3f2ee">
-            <th style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#5f5e5a;padding:10px 20px;text-align:left;width:30%">Initiative</th>
-            <th style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text2);padding:10px 16px;text-align:left;width:22%">KPI</th>
-            <th style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text2);padding:10px 16px;text-align:left;width:16%">Period</th>
-            <th style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text2);padding:10px 16px;text-align:left;width:16%">Value</th>
-            <th style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text2);padding:10px 16px;text-align:left;width:16%">Last Saved</th>
+            <th style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#5f5e5a;padding:10px 16px;text-align:left;min-width:180px;position:sticky;left:0;background:#f3f2ee;z-index:1">Initiative</th>
+            <th style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#5f5e5a;padding:10px 12px;text-align:left;min-width:130px">KPI</th>
           </tr>
         </thead>
         <tbody id="kpi-update-body">
-          <tr><td colspan="5" style="padding:32px;text-align:center;color:var(--text2);font-size:13px">Loading…</td></tr>
+          <tr><td colspan="14" style="padding:32px;text-align:center;color:var(--text2);font-size:13px">Loading…</td></tr>
         </tbody>
       </table>
     </div>
@@ -2194,7 +2220,7 @@ Managing Partner</textarea></div>
 var LANG='en';
 var I18N={
 en:{lang_label:'Language:',nav_dashboard:'Dashboard',nav_portfolio:'Portfolio Companies',nav_objectives:'Value Creation Plans',nav_add_company:'Add Company',nav_add_initiative:'Add Objective',nav_performance:'Performance',nav_reports:'Reports',nav_exits:'Exit Tracking',nav_team:'Team',nav_settings:'Settings',user_role:'Managing Partner',
-dash_title:'Valcrium',dash_sub:'Portfolio intelligence platform · Q1 2026',dash_overview:'Portfolio Overview',
+dash_title:'Dashboard',dash_sub:'View companies with value creation plans and track their progress',dash_overview:'Portfolio Overview',
 kpi_inv:'Total Portfolio Investment',kpi_inv_sub:'Deployed across 5 portfolio companies',kpi_cos:'Companies with Value Creation Plans',kpi_cos_sub:'100% of portfolio companies enrolled',
 chart_col:'Goals per Portfolio Company',chart_col_hint:'Click a bar to drill down',chart_scatter:'Revenue vs EBITDA Change Since Acquisition',chart_vcp:'Value Creation Plan Status',chart_vcp_hint:'Click a segment or legend to drill down',chart_goals:'Goal Completion Timeline',chart_goals_hint:'Click a segment or legend to drill down',
 add_co_title:'Add Portfolio Company',add_co_sub:'Record a new investment',s_co_info:'Company Information',s_inv_cost:'Cost of Investment',s_financials:'Financials at Time of Acquisition',s_deal:'Deal Details & Return Targets',s_contacts:'Key Contacts & Oversight',
@@ -2333,7 +2359,7 @@ draft_saved:'✓ Draft saved'},
   rpt_type:'Report Type',rpt_gantt:'Initiative Timeline (Gantt)',rpt_table:'Data Table',rpt_portfolio:'Portfolio Summary',rpt_vcp:'VCP Status Report',rpt_objectives:'Objectives Progress',rpt_sector:'Sector Analysis',rpt_co:'Portfolio Company',rpt_all_co:'All Companies',rpt_all_stat:'All Statuses',rpt_horizon:'Time Horizon',rpt_view:'Timeline View',rpt_sort:'Sort By',rpt_labels:'Show Labels',rpt_cols:'Table Columns',rpt_pdf:'PDF',rpt_csv:'CSV',rpt_email:'Email Report',
 
 fr:{lang_label:'Langue :',nav_dashboard:'Tableau de Bord',nav_portfolio:'Sociétés en Portefeuille',nav_objectives:'Plans de Création de Valeur',nav_add_company:'Ajouter Société',nav_add_initiative:'Ajouter Objectif',nav_performance:'Performance',nav_reports:'Rapports',nav_exits:'Suivi des Sorties',nav_team:'Équipe',nav_settings:'Paramètres',user_role:'Associé Gérant',
-dash_title:'Valcrium',dash_sub:'Suivi des initiatives du portefeuille · T1 2026',dash_overview:'Vue d\'Ensemble du Portefeuille',
+dash_title:'Dashboard',dash_sub:'View companies with value creation plans and track their progress',dash_overview:'Vue d\'Ensemble du Portefeuille',
 kpi_inv:'Investissement Total du Portefeuille',kpi_inv_sub:'Déployé dans 5 sociétés en portefeuille',kpi_cos:'Sociétés avec Plans de Création de Valeur',kpi_cos_sub:'100% des sociétés inscrites',
 chart_col:'Objectifs par Société',chart_col_hint:'Cliquez sur une barre pour voir les détails',chart_scatter:'Évolution du CA et de l\'EBITDA depuis l\'Acquisition',chart_vcp:'Statut du Plan de Création de Valeur',chart_vcp_hint:'Cliquez sur un segment pour voir les détails',chart_goals:'Calendrier de Réalisation des Objectifs',chart_goals_hint:'Cliquez sur un segment ou une légende pour voir les détails',
 add_co_title:'Ajouter une Société en Portefeuille',add_co_sub:'Enregistrer un nouvel investissement',s_co_info:'Informations sur la Société',s_inv_cost:'Coût de l\'Investissement',s_financials:'Données Financières à la Date d\'Acquisition',s_deal:'Détails de l\'Opération & Objectifs de Rendement',s_contacts:'Contacts Clés & Supervision',
@@ -2469,7 +2495,7 @@ draft_saved:'✓ Brouillon enregistré',
 
 },
 es:{lang_label:'Idioma:',nav_dashboard:'Panel Principal',nav_portfolio:'Empresas del Portafolio',nav_objectives:'Planes de Creación de Valor',nav_add_company:'Agregar Empresa',nav_add_initiative:'Agregar Objetivo',nav_performance:'Rendimiento',nav_reports:'Informes',nav_exits:'Seguimiento de Salidas',nav_team:'Equipo',nav_settings:'Configuración',user_role:'Socio Director',
-dash_title:'Valcrium',dash_sub:'Seguimiento de iniciativas del portafolio · T1 2026',dash_overview:'Resumen del Portafolio',
+dash_title:'Dashboard',dash_sub:'View companies with value creation plans and track their progress',dash_overview:'Resumen del Portafolio',
 kpi_inv:'Inversión Total del Portafolio',kpi_inv_sub:'Desplegado en 5 empresas del portafolio',kpi_cos:'Empresas con Planes de Creación de Valor',kpi_cos_sub:'100% de las empresas inscritas',
 chart_col:'Objetivos por Empresa',chart_col_hint:'Haga clic en una barra para ver los detalles',chart_scatter:'Variación de Ingresos y EBITDA desde la Adquisición',chart_vcp:'Estado del Plan de Creación de Valor',chart_vcp_hint:'Haga clic en un segmento para ver detalles',chart_goals:'Cronograma de Cumplimiento de Objetivos',chart_goals_hint:'Haga clic en un segmento o leyenda para ver detalles',
 add_co_title:'Agregar Empresa al Portafolio',add_co_sub:'Registrar una nueva inversión',s_co_info:'Información de la Empresa',s_inv_cost:'Costo de la Inversión',s_financials:'Datos Financieros en la Fecha de Adquisición',s_deal:'Detalles del Acuerdo y Objetivos de Retorno',s_contacts:'Contactos Clave y Supervisión',
@@ -2872,7 +2898,7 @@ function navTo(pageId){
     }
   }
   if(pageId==='page-reports'){initReportCompanyDropdown();renderGantt();}
-  if(pageId==='page-dashboard')animateHeroMetrics();
+  if(pageId==='page-dashboard'){animateHeroMetrics();setTimeout(runInitDash,150);}
   if(pageId==='page-settings')loadNotifSettings();
   if(pageId==='page-kpi-update')renderKPIUpdate();
   if(pageId==='page-add-initiative'){
@@ -4607,42 +4633,46 @@ function dictateStop(prefix) {
 
 
 
+// Demo portfolio data — populated globally so all pages can access it
+portfolioInitiatives={
+  'Not Started':[{name:'APAC Market Entry',cat:'Geographic Expansion',company:'Stackr Software',pct:0,color:'#b4b2a9',owner:'Ryan Kelso',oi:3}],
+  'On Track':[
+    {name:'ERP System Modernization',cat:'Digital Transformation',company:'NordPack Group',pct:72,color:'#2d9b6f',owner:'Sarah Chen',oi:0},
+    {name:'SKU Rationalisation',kpi:'SKU count reduction %',isQuantitative:true,cat:'Portfolio Simplification',company:'NordPack Group',pct:90,color:'#2d9b6f',owner:'Sarah Chen',oi:0},
+    {name:'Sales Force Effectiveness',kpi:'Revenue per sales rep ($)',isQuantitative:true,cat:'Revenue Growth',company:'Ventex Logistics',pct:58,color:'#2d9b6f',owner:'Diana Mora',oi:2},
+    {name:'Route Optimisation AI',cat:'Operations',company:'Ventex Logistics',pct:65,color:'#2d9b6f',owner:'Diana Mora',oi:2},
+    {name:'Pricing Power Initiative',kpi:'Avg selling price index',isQuantitative:true,cat:'Revenue Growth',company:'Corelux Healthcare',pct:55,color:'#2d9b6f',owner:'Priya Nair',oi:4},
+    {name:'Platform Scalability v2',cat:'Digital Infrastructure',company:'Stackr Software',pct:70,color:'#2d9b6f',owner:'Lena Bauer',oi:6},
+    {name:'Enterprise GTM Expansion',kpi:'New ARR ($M)',isQuantitative:true,cat:'Revenue Growth',company:'Stackr Software',pct:60,color:'#2d9b6f',owner:'Lena Bauer',oi:6},
+    {name:'Procurement Centralisation',kpi:'Procurement savings ($M)',isQuantitative:true,cat:'Cost Optimisation',company:'Meridian Retail',pct:68,color:'#2d9b6f',owner:'Ana Flores',oi:2},
+    {name:'Omnichannel Integration',cat:'Digital Transformation',company:'Meridian Retail',pct:44,color:'#2d9b6f',owner:'Carlos Ruiz',oi:1},
+    {name:'Private Label Expansion',cat:'Revenue Growth',company:'Meridian Retail',pct:77,color:'#2d9b6f',owner:'Ana Flores',oi:2}
+  ],
+  'Challenges':[
+    {name:'EBITDA Margin Expansion',kpi:'EBITDA margin %',isQuantitative:true,cat:'Cost Optimisation',company:'NordPack Group',pct:45,color:'#d4890a',owner:'Marcus Webb',oi:1},
+    {name:'Fleet Electrification',cat:'Sustainability',company:'Ventex Logistics',pct:30,color:'#d4890a',owner:'Tom Hargreaves',oi:3},
+    {name:'M&A Integration — AluTech',cat:'Inorganic Growth',company:'Ventex Logistics',pct:40,color:'#d4890a',owner:'Tom Hargreaves',oi:3},
+    {name:'Headcount Optimisation',cat:'Cost Optimisation',company:'Corelux Healthcare',pct:35,color:'#d4890a',owner:'James Alderton',oi:5}
+  ],
+  'At Risk':[
+    {name:'Fleet Electrification Ph.2',cat:'Sustainability',company:'Ventex Logistics',pct:18,color:'#c03535',owner:'Tom Hargreaves',oi:3},
+    {name:'Supplier Consolidation',cat:'Procurement',company:'Meridian Retail',pct:22,color:'#c03535',owner:'Ana Flores',oi:2},
+    {name:'Working Capital Reduction',kpi:'Working capital days',isQuantitative:true,cat:'Balance Sheet Mgmt',company:'NordPack Group',pct:25,color:'#c03535',owner:'Marcus Webb',oi:1}
+  ],
+  'Completed':[
+    {name:'Clinical Trials Pipeline',cat:'R&D Acceleration',company:'Corelux Healthcare',pct:100,color:'#3266ad',owner:'James Alderton',oi:5},
+    {name:'Churn Reduction Programme',cat:'Customer Retention',company:'Stackr Software',pct:100,color:'#3266ad',owner:'Ryan Kelso',oi:3}
+  ]
+};
+
 function runInitDash(){
+  // Destroy existing charts so onClick handlers rebind cleanly
+  if(colChart){try{colChart.destroy();}catch(e){} colChart=null;}
   try{(function initDash(){
   var dark=window.matchMedia&&window.matchMedia('(prefers-color-scheme:dark)').matches;
   var tc=dark?'#b8b6ae':'#73726c',gc=dark?'rgba(255,255,255,0.07)':'rgba(0,0,0,0.06)';
   coColors=portfolioCompanies.map(function(c){return c.color;});
 
-  portfolioInitiatives={
-    'Not Started':[{name:'APAC Market Entry',cat:'Geographic Expansion',company:'Stackr Software',pct:0,color:'#b4b2a9',owner:'Ryan Kelso',oi:3}],
-    'On Track':[
-      {name:'ERP System Modernization',cat:'Digital Transformation',company:'NordPack Group',pct:72,color:'#2d9b6f',owner:'Sarah Chen',oi:0},
-      {name:'SKU Rationalisation',kpi:'SKU count reduction %',isQuantitative:true,cat:'Portfolio Simplification',company:'NordPack Group',pct:90,color:'#2d9b6f',owner:'Sarah Chen',oi:0},
-      {name:'Sales Force Effectiveness',kpi:'Revenue per sales rep ($)',isQuantitative:true,cat:'Revenue Growth',company:'Ventex Logistics',pct:58,color:'#2d9b6f',owner:'Diana Mora',oi:2},
-      {name:'Route Optimisation AI',cat:'Operations',company:'Ventex Logistics',pct:65,color:'#2d9b6f',owner:'Diana Mora',oi:2},
-      {name:'Pricing Power Initiative',kpi:'Avg selling price index',isQuantitative:true,cat:'Revenue Growth',company:'Corelux Healthcare',pct:55,color:'#2d9b6f',owner:'Priya Nair',oi:4},
-      {name:'Platform Scalability v2',cat:'Digital Infrastructure',company:'Stackr Software',pct:70,color:'#2d9b6f',owner:'Lena Bauer',oi:6},
-      {name:'Enterprise GTM Expansion',kpi:'New ARR ($M)',isQuantitative:true,cat:'Revenue Growth',company:'Stackr Software',pct:60,color:'#2d9b6f',owner:'Lena Bauer',oi:6},
-      {name:'Procurement Centralisation',kpi:'Procurement savings ($M)',isQuantitative:true,cat:'Cost Optimisation',company:'Meridian Retail',pct:68,color:'#2d9b6f',owner:'Ana Flores',oi:2},
-      {name:'Omnichannel Integration',cat:'Digital Transformation',company:'Meridian Retail',pct:44,color:'#2d9b6f',owner:'Carlos Ruiz',oi:1},
-      {name:'Private Label Expansion',cat:'Revenue Growth',company:'Meridian Retail',pct:77,color:'#2d9b6f',owner:'Ana Flores',oi:2}
-    ],
-    'Challenges':[
-      {name:'EBITDA Margin Expansion',kpi:'EBITDA margin %',isQuantitative:true,cat:'Cost Optimisation',company:'NordPack Group',pct:45,color:'#d4890a',owner:'Marcus Webb',oi:1},
-      {name:'Fleet Electrification',cat:'Sustainability',company:'Ventex Logistics',pct:30,color:'#d4890a',owner:'Tom Hargreaves',oi:3},
-      {name:'M&A Integration — AluTech',cat:'Inorganic Growth',company:'Ventex Logistics',pct:40,color:'#d4890a',owner:'Tom Hargreaves',oi:3},
-      {name:'Headcount Optimisation',cat:'Cost Optimisation',company:'Corelux Healthcare',pct:35,color:'#d4890a',owner:'James Alderton',oi:5}
-    ],
-    'At Risk':[
-      {name:'Fleet Electrification Ph.2',cat:'Sustainability',company:'Ventex Logistics',pct:18,color:'#c03535',owner:'Tom Hargreaves',oi:3},
-      {name:'Supplier Consolidation',cat:'Procurement',company:'Meridian Retail',pct:22,color:'#c03535',owner:'Ana Flores',oi:2},
-      {name:'Working Capital Reduction',kpi:'Working capital days',isQuantitative:true,cat:'Balance Sheet Mgmt',company:'NordPack Group',pct:25,color:'#c03535',owner:'Marcus Webb',oi:1}
-    ],
-    'Completed':[
-      {name:'Clinical Trials Pipeline',cat:'R&D Acceleration',company:'Corelux Healthcare',pct:100,color:'#3266ad',owner:'James Alderton',oi:5},
-      {name:'Churn Reduction Programme',cat:'Customer Retention',company:'Stackr Software',pct:100,color:'#3266ad',owner:'Ryan Kelso',oi:3}
-    ]
-  };
 
   // Column chart
   colColors = coColors.slice();
@@ -6397,110 +6427,129 @@ try {
 } catch(e){}
 
 function renderKPIUpdate(){
-  var tbody = document.getElementById('kpi-update-body');
+  var tbody  = document.getElementById('kpi-update-body');
+  var thead  = document.getElementById('kpi-update-thead');
   if(!tbody) return;
 
-  var rows = [];
-  var seen = {};
+  // Populate company filter
+  var coSel = document.getElementById('kpi-co-filter');
+  if(coSel && coSel.options.length <= 1){
+    portfolioCompanies.forEach(function(co){
+      var o = document.createElement('option');
+      o.value = co.name; o.textContent = co.name;
+      coSel.appendChild(o);
+    });
+  }
 
-  // 1. Demo portfolioInitiatives
+  // Populate year filter
+  var yearSel = document.getElementById('kpi-year-filter');
+  var now = new Date();
+  var selYear = yearSel ? parseInt(yearSel.value) || now.getFullYear() : now.getFullYear();
+  if(yearSel && yearSel.options.length === 0){
+    for(var y = now.getFullYear() + 1; y >= now.getFullYear() - 3; y--){
+      var o = document.createElement('option');
+      o.value = y; o.textContent = y;
+      if(y === now.getFullYear()) o.selected = true;
+      yearSel.appendChild(o);
+    }
+  }
+  selYear = yearSel ? parseInt(yearSel.value) : now.getFullYear();
+
+  var coFilter = coSel ? coSel.value : '';
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  // Gather quantitative initiatives
+  var rows = []; var seen = {};
   Object.keys(portfolioInitiatives).forEach(function(st){
     portfolioInitiatives[st].forEach(function(ini){
-      if(ini.isQuantitative || ini.kpi){
-        var k = ini.company + '::' + ini.name;
+      if((ini.isQuantitative || ini.kpi) && (!coFilter || ini.company === coFilter)){
+        var k = ini.company+'::'+ini.name;
         if(!seen[k]){ seen[k]=true; rows.push({key:k, name:ini.name, company:ini.company, kpi:ini.kpi||'—'}); }
       }
     });
   });
-
-  // 2. In-memory submittedObjectives (most up-to-date)
   (window.submittedObjectives||[]).forEach(function(obj){
-    if(obj.isQuantitative || obj.kpi){
+    if((obj.isQuantitative || obj.kpi) && (!coFilter || obj.company === coFilter)){
       var nm = obj.title||obj.initiative||'';
-      var k  = (obj.company||'') + '::' + nm;
+      var k  = (obj.company||'')+'::'+nm;
       if(!seen[k]){ seen[k]=true; rows.push({key:k, name:nm||'—', company:obj.company||'—', kpi:obj.kpi||'—'}); }
     }
   });
 
-  // 3. Persisted localStorage (catches page-reload case)
-  try {
-    var saved = JSON.parse(localStorage.getItem('pe_objectives')||'[]');
-    saved.forEach(function(obj){
-      if(obj.isQuantitative || obj.kpi){
-        var nm = obj.title||obj.initiative||'';
-        var k  = (obj.company||'') + '::' + nm;
-        if(!seen[k]){ seen[k]=true; rows.push({key:k, name:nm||'—', company:obj.company||'—', kpi:obj.kpi||'—'}); }
-      }
-    });
-  } catch(e){}
-
   if(!rows.length){
-    tbody.innerHTML = '<tr style="background:#ffffff"><td colspan="5" style="padding:32px;text-align:center;color:#5f5e5a;font-size:13px">'
-      +'No quantitative initiatives found.<br>'
-      +'<span style="font-size:12px">Check "Quantitative Initiative" and enter a KPI when adding an initiative.</span>'
-      +'</td></tr>';
-    tbody._rows = [];
+    tbody.innerHTML = '<tr style="background:#ffffff"><td colspan="14" style="padding:32px;text-align:center;color:#5f5e5a;font-size:13px">No quantitative initiatives found.<br><small>Check "Quantitative Initiative" when adding an initiative.</small></td></tr>';
     return;
   }
 
-  var now = new Date();
-  var defaultPeriod = now.toLocaleString('en-GB',{month:'short'})+' '+now.getFullYear();
+  // Build header with month columns
+  var thStyle = 'font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#5f5e5a;padding:10px 8px;text-align:center;min-width:70px;background:#f3f2ee';
+  var thHTML = '<tr style="border-bottom:2px solid #e0dfd7;background:#f3f2ee">'
+    + '<th style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#5f5e5a;padding:10px 16px;text-align:left;min-width:180px;position:sticky;left:0;background:#f3f2ee;z-index:1">Initiative</th>'
+    + '<th style="'+thStyle+';text-align:left;min-width:130px">KPI</th>';
+  months.forEach(function(m){ thHTML += '<th style="'+thStyle+'">'+m+'</th>'; });
+  thHTML += '</tr>';
+  thead.innerHTML = thHTML;
 
-  tbody.innerHTML = rows.map(function(r,i){
-    var sv = window.kpiValues[r.key]||{};
-    var val = sv.value!==undefined ? sv.value : '';
-    var period = sv.period||defaultPeriod;
-    var lastSaved = sv.savedAt ? new Date(sv.savedAt).toLocaleString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}) : '—';
-    return '<tr style="border-bottom:1px solid #e0dfd7;background:#ffffff">'
-      +'<td style="padding:12px 20px"><div style="font-size:13px;font-weight:600;color:#1a1a18">'+r.name+'</div>'
-      +'<div style="font-size:11px;color:#5f5e5a;margin-top:2px">'+r.company+'</div></td>'
-      +'<td style="padding:12px 16px;font-size:12px;color:#5f5e5a">'+r.kpi+'</td>'
-      +'<td style="padding:8px 12px"><input type="text" class="kpi-period-input" data-key="'+r.key+'" value="'+period+'" '
-        +'style="width:100%;font-size:12px;border:1px solid #b8b7b0;border-radius:8px;padding:6px 10px;background:#ffffff;color:#1a1a18;font-family:inherit"></td>'
-      +'<td style="padding:8px 12px"><input type="number" class="kpi-value-input" data-key="'+r.key+'" value="'+val+'" '
-        +'placeholder="Enter value" step="any" '
-        +'style="width:100%;font-size:13px;font-weight:600;border:1px solid #b8b7b0;border-radius:8px;padding:6px 10px;background:#ffffff;color:#1a1a18;font-family:inherit"></td>'
-      +'<td style="padding:12px 16px;font-size:11px;color:#5f5e5a" id="kpi-last-'+i+'">'+lastSaved+'</td>'
+  // Build rows
+  var inputStyle = 'width:100%;font-size:12px;font-weight:600;border:1px solid #e0dfd7;border-radius:6px;padding:5px 6px;text-align:center;background:#ffffff;color:#1a1a18;font-family:inherit;box-sizing:border-box';
+  tbody.innerHTML = rows.map(function(r){
+    var cells = months.map(function(m, mi){
+      var periodKey = m+' '+selYear;
+      var sv = window.kpiValues[r.key+'::'+periodKey] || window.kpiValues[r.key] || {};
+      // Only use value if period matches
+      var val = '';
+      if(window.kpiValues[r.key+'::'+periodKey]) val = window.kpiValues[r.key+'::'+periodKey].value !== undefined ? window.kpiValues[r.key+'::'+periodKey].value : '';
+      return '<td style="padding:5px 6px;background:#ffffff">'
+        +'<input type="number" step="any" placeholder="—" value="'+val+'" '
+        +'data-key="'+r.key+'" data-period="'+periodKey+'" '
+        +'style="'+inputStyle+'">'
+        +'</td>';
+    }).join('');
+    return '<tr style="border-bottom:1px solid #e0dfd7">'
+      +'<td style="padding:10px 16px;background:#ffffff;position:sticky;left:0;z-index:1">'
+        +'<div style="font-size:13px;font-weight:600;color:#1a1a18">'+r.name+'</div>'
+        +'<div style="font-size:11px;color:#5f5e5a;margin-top:2px">'+r.company+'</div>'
+      +'</td>'
+      +'<td style="padding:10px 12px;font-size:12px;color:#5f5e5a;background:#ffffff">'+r.kpi+'</td>'
+      +cells
       +'</tr>';
   }).join('');
+
   tbody._rows = rows;
 }
 
 function saveAllKPI(){
   var tbody = document.getElementById('kpi-update-body');
-  if(!tbody || !tbody._rows) return;
+  if(!tbody) return;
 
-  var now = new Date();
+  var inputs = tbody.querySelectorAll('input[data-key]');
   var savedCount = 0;
+  var now = new Date();
 
-  tbody._rows.forEach(function(r, i){
-    var valEl    = tbody.querySelector('.kpi-value-input[data-key="' + r.key + '"]');
-    var periodEl = tbody.querySelector('.kpi-period-input[data-key="' + r.key + '"]');
-    if(!valEl || valEl.value === '') return;
-
-    window.kpiValues[r.key] = {
-      value:   parseFloat(valEl.value),
-      period:  (periodEl ? periodEl.value : '') || '',
+  inputs.forEach(function(input){
+    if(input.value === '') return;
+    var key = input.getAttribute('data-key');
+    var period = input.getAttribute('data-period');
+    var storeKey = key+'::'+period;
+    window.kpiValues[storeKey] = {
+      value: parseFloat(input.value),
+      period: period,
       savedAt: now.toISOString(),
       savedBy: currentUser ? currentUser.name : 'User'
     };
-
-    // Update last-saved cell
-    var lastCell = document.getElementById('kpi-last-' + i);
-    if(lastCell) lastCell.textContent = now.toLocaleString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
-
     savedCount++;
   });
 
-  try { localStorage.setItem('pe_kpi_values', JSON.stringify(window.kpiValues)); } catch(e){}
+  try{ localStorage.setItem('pe_kpi_values', JSON.stringify(window.kpiValues)); }catch(e){}
 
   var btn = document.getElementById('kpi-save-btn');
   if(btn){
-    btn.textContent = '✓ ' + savedCount + ' Saved';
+    btn.textContent = '✓ '+savedCount+' Saved';
     btn.style.background = 'var(--green)';
-    setTimeout(function(){ btn.textContent = 'Save All ✓'; btn.style.background = ''; }, 2000);
+    setTimeout(function(){ btn.textContent='Save All ✓'; btn.style.background=''; }, 2000);
   }
 }
+
 
 
 </script>
